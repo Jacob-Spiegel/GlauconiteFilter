@@ -1,45 +1,45 @@
 #!/usr/bin/env python
 """
-This script will handle running SMILESMerge in a docker container.
+This script will handle running GlauconiteFilterer in a docker container.
 It handles generating the docker image and container, handling the user variables,
-executing SMILESMerge, and copying the files from the container to the desired directory.
+executing GlauconiteFilterer, and copying the files from the container to the desired directory.
 
 This script requires a JSON file that contains all the parameters that would be
-required to run SMILESMerge on a host system (ie paths on your computer).
+required to run GlauconiteFilterer on a host system (ie paths on your computer).
 Necessary files, such as the source compound file, will be copied into the docker.
 
-To run SMILESMerge from within docker. Launches docker
-  image. Accepts the exact same parameters as SMILESMerge, with the following
+To run GlauconiteFilterer from within docker. Launches docker
+  image. Accepts the exact same parameters as GlauconiteFilterer, with the following
   exceptions:
     1) User variables must be supplied in JSON format.
         - Please see documentation within the tutorial manual and an example can be found:
-          -  ./examples/sample_SMILESMerge_docker_json.json
+          -  ./examples/sample_GlauconiteFilterer_docker_json.json
 
     Required variables within the JSON file:
     - `-root_output_folder`: folder path on host system that results will be copied to.
     - `-source_compound_file`: Path on host system to the tab-delineate .smi
         file that will seed generation 1.
 
-The resulting SMILESMerge output to the desired root_output_folder.
+The resulting GlauconiteFilterer output to the desired root_output_folder.
 
-An example JSON is provided in: ./sample_SMILESMerge_docker_json.json
+An example JSON is provided in: ./sample_GlauconiteFilterer_docker_json.json
 
 
-To run SMILESMerge in a docker, please run the `smilesmerge_in_docker.py` script:
+To run GlauconiteFilterer in a docker, please run the `glauconite_in_docker.py` script:
     Example on Linux/MacOS:
         #  cd to this directory in a bash terminal
-        1) cd SMILESMerge/docker/
-        # Run smilesmerge_in_docker.py with sudo and supply a json file using the
+        1) cd GlauconiteFilterer/docker/
+        # Run glauconite_in_docker.py with sudo and supply a json file using the
         # normal pathing of your system.
-        2) `sudo python smilesmerge_in_docker.py -j ./examples/sample_SMILESMerge_docker_json.json`
+        2) `sudo python glauconite_in_docker.py -j ./examples/sample_GlauconiteFilterer_docker_json.json`
 
         # Results will be output to the directory specified by the root_output_folder variable
 
     Example on Windows OS:
         1) open a docker enabled and bash enabled terminal with administrative privileges
         #  cd to this directory in a bash terminal
-        3) cd SMILESMerge/docker/
-        4)  `python smilesmerge_in_docker.py -j ./examples/sample_SMILESMerge_docker_json.json`
+        3) cd GlauconiteFilterer/docker/
+        4)  `python glauconite_in_docker.py -j ./examples/sample_GlauconiteFilterer_docker_json.json`
 
         # Results will be output to the directory specified by the root_output_folder variable
 
@@ -108,22 +108,22 @@ def change_permissions_recursively(file_or_folder_path):
 def adjust_dockerfile():
     """
     This will open Dockerfile and check if the entrypoint has been switched
-    to the windows version (run_smilesmerge_in_container.bash) if not it will
+    to the windows version (run_glauconite_in_container.bash) if not it will
     modify the Dockerfile to use the windows version of the script.
 
     This only should run on Windows OS.
 
     Change:
-        ENTRYPOINT ["bash", "/smilesmerge/run_smilesmerge_in_container.bash"]
+        ENTRYPOINT ["bash", "/glauconite/run_glauconite_in_container.bash"]
     To:
-        # ENTRYPOINT ["bash", "/smilesmerge/run_smilesmerge_in_container.bash"]
-        ENTRYPOINT ["bash", "/smilesmerge/run_smilesmerge_in_container_windows.bash"]
+        # ENTRYPOINT ["bash", "/glauconite/run_glauconite_in_container.bash"]
+        ENTRYPOINT ["bash", "/glauconite/run_glauconite_in_container_windows.bash"]
     """
     printout = ""
-    normal_entry = "/smilesmerge/run_smilesmerge_in_container.bash"
-    windows_entry = "/smilesmerge/run_smilesmerge_in_container_windows.bash"
+    normal_entry = "/glauconite/run_glauconite_in_container.bash"
+    windows_entry = "/glauconite/run_glauconite_in_container_windows.bash"
     replacement_line = (
-        'ENTRYPOINT ["bash", "/smilesmerge/run_smilesmerge_in_container_windows.bash"]\n'
+        'ENTRYPOINT ["bash", "/glauconite/run_glauconite_in_container_windows.bash"]\n'
     )
     print("Modifying the Dockerfile to run for Windows. Changing Entrypoint.")
     with open(os.path.abspath("Dockerfile"), "r") as f:
@@ -143,7 +143,7 @@ def adjust_dockerfile():
 
 def make_docker():
     """
-    This will create the docker to run SMILESMerge.
+    This will create the docker to run GlauconiteFilterer.
     This is also where all of the files are copied into the image.
 
     If docker image can not be created it will raise an exception.
@@ -152,7 +152,7 @@ def make_docker():
         # so it's running under windows. multiprocessing disabled
         adjust_dockerfile()
 
-    print("Creating new docker image for SMILESMerge")
+    print("Creating new docker image for GlauconiteFilterer")
     output_and_log_dir = os.path.abspath("output_and_log_dir") + os.sep
     log_file = "{}log.txt".format(output_and_log_dir)
     printout = (
@@ -163,12 +163,12 @@ def make_docker():
 
     print(printout)
     try:
-        os.system("docker build -t smilesmerge . > {}".format(log_file))
+        os.system("docker build -t glauconite . > {}".format(log_file))
     except:
         printout = (
             "\nCan not create a docker file. Please make sure to run the "
             + "script with sudo/administrative privileges.\nIf Linux/MacOS:\n"
-            + "\t'sudo python smilesmerge_in_docker.py -j PATH/JSON.json'\n"
+            + "\t'sudo python glauconite_in_docker.py -j PATH/JSON.json'\n"
             + "If Windows:\n\tRun from bash and "
             + "docker enabled terminal with administrative privileges.\n"
             + "Please also make sure docker is installed on the system."
@@ -176,8 +176,8 @@ def make_docker():
         print(printout)
         raise Exception(printout)
 
-    # Remove the temporary SMILESMerge directory
-    shutil.rmtree("SMILESMerge")
+    # Remove the temporary GlauconiteFilterer directory
+    shutil.rmtree("GlauconiteFilterer")
 
 
 def check_for_required_inputs(json_vars):
@@ -210,7 +210,7 @@ def check_for_required_inputs(json_vars):
 
     if len(missing_variables) != 0:
         printout = "\nRequired variables are missing from the input. A description \
-            of each of these can be found by running python ./RunSMILESMerge -h"
+            of each of these can be found by running python ./RunGlauconiteFilterer -h"
         printout = printout + "\nThe following required variables are missing: "
         for variable in missing_variables:
             printout = printout + "\n\t" + variable
@@ -439,32 +439,32 @@ def move_files_to_temp_dir(json_vars):
     change_permissions_recursively(temp_dir_path)
     change_permissions_recursively(output_and_log_dir)
 
-    # Copy over SMILESMerge files into a temp directory
-    temp_smilesmerge_path = os.path.abspath("SMILESMerge") + os.sep
+    # Copy over GlauconiteFilterer files into a temp directory
+    temp_glauconite_path = os.path.abspath("GlauconiteFilterer") + os.sep
 
     script_dir = str(os.path.dirname(os.path.realpath(__file__)))
-    smilesmerge_top_dir = str(os.path.dirname(script_dir))
-    if os.path.exists(temp_smilesmerge_path):
-        shutil.rmtree(temp_smilesmerge_path)
-    os.mkdir(temp_smilesmerge_path)
-    smilesmerge_top_dir = smilesmerge_top_dir + os.sep
-    change_permissions_recursively(temp_smilesmerge_path)
+    glauconite_top_dir = str(os.path.dirname(script_dir))
+    if os.path.exists(temp_glauconite_path):
+        shutil.rmtree(temp_glauconite_path)
+    os.mkdir(temp_glauconite_path)
+    glauconite_top_dir = glauconite_top_dir + os.sep
+    change_permissions_recursively(temp_glauconite_path)
 
-    # Copy all files in SMILESMerge directory into a temp except the Docker folder
+    # Copy all files in GlauconiteFilterer directory into a temp except the Docker folder
     for fol_to_copy in [
-        "smilesmerge",
+        "glauconite",
         "source_compounds",
         "accessory_scripts",
         "tutorial",
     ]:
         shutil.copytree(
-            smilesmerge_top_dir + fol_to_copy, temp_smilesmerge_path + fol_to_copy
+            glauconite_top_dir + fol_to_copy, temp_glauconite_path + fol_to_copy
         )
     shutil.copyfile(
-        smilesmerge_top_dir + "RunSMILESMerge.py", temp_smilesmerge_path + "RunSMILESMerge.py"
+        glauconite_top_dir + "RunGlauconiteFilterer.py", temp_glauconite_path + "RunGlauconiteFilterer.py"
     )
     # Open permissions
-    change_permissions_recursively(temp_smilesmerge_path)
+    change_permissions_recursively(temp_glauconite_path)
 
 
 def handle_json_info(vars):
@@ -503,7 +503,7 @@ def handle_json_info(vars):
     return json_vars, outfolder_path, run_num
 
 
-def run_SMILESMerge_docker_main(vars):
+def run_GlauconiteFilterer_docker_main(vars):
     """
     This function runs the processing to:
         1) check that JSON file has basic info
@@ -514,16 +514,16 @@ def run_SMILESMerge_docker_main(vars):
         4) Build docker image and link files to output folder
             -This includes an adjustment to the Dockerfile if
             running it on a Windows OS
-        5) execute RunSMILESMerge.py from within the docker container
+        5) execute RunGlauconiteFilterer.py from within the docker container
         6) export the files back to the final end dir
 
     Inputs:
     :param dict vars: Dictionary of User specified variables
     """
     printout = (
-        "\n\nThis script builds a docker for SMILESMerge and runs SMILESMerge "
+        "\n\nThis script builds a docker for GlauconiteFilterer and runs GlauconiteFilterer "
         + "within the docker. The setup may take a few minutes the first time being run "
-        + "and SMILESMerge may take a long time depending on the settings.\n\n"
+        + "and GlauconiteFilterer may take a long time depending on the settings.\n\n"
     )
     print(printout)
 
@@ -548,16 +548,16 @@ def run_SMILESMerge_docker_main(vars):
     # Run build docker image
     make_docker()
 
-    # Run part 5) run SMILESMerge in the container
-    print("\nRunning SMILESMerge in Docker")
+    # Run part 5) run GlauconiteFilterer in the container
+    print("\nRunning GlauconiteFilterer in Docker")
 
     command = "docker run --rm -it -v {}:/Outputfolder/".format(outfolder_path)
-    command = command + " smilesmerge  --name smilesmerge  --{}".format(run_num)
-    # Execute SMILESMerge
+    command = command + " glauconite  --name glauconite  --{}".format(run_num)
+    # Execute GlauconiteFilterer
     print(command)
     os.system(command)
     change_permissions_recursively(outfolder_path)
-    print("SMILESMerge Results placed in: {}".format(outfolder_path))
+    print("GlauconiteFilterer Results placed in: {}".format(outfolder_path))
 
 
 PARSER = argparse.ArgumentParser()
@@ -570,7 +570,7 @@ PARSER.add_argument(
     required=True,
     help="Name of a json file containing all parameters. \
     Overrides other arguments. This takes all the parameters described in \
-    RunSMILESMerge.py.",
+    RunGlauconiteFilterer.py.",
 )
 PARSER.add_argument(
     "--override_sudo_admin_privileges",
@@ -620,4 +620,4 @@ else:
     print("##############################################################\n")
 
 
-run_SMILESMerge_docker_main(ARGS_DICT)
+run_GlauconiteFilterer_docker_main(ARGS_DICT)

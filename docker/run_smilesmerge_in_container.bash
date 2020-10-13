@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script runs SMILESMerge from within the docker container
+# This script runs GlauconiteFilterer from within the docker container
 # It serves as the ENTRYPOINT of the docker.
 
 if echo $* | grep -q "test"; then
@@ -13,7 +13,7 @@ if echo $* | grep -q "Run"; then
     }
 
     # chmod -R a+rwx Outputfolder/
-    echo "Running SMILESMerge"
+    echo "Running GlauconiteFilterer"
 
     date_time=$(my_date)
 
@@ -32,7 +32,7 @@ if echo $* | grep -q "Run"; then
         echo "" >> $output_file
         echo "" >> $output_file
         echo "###################################\n" >> $output_file
-        echo "CONTINUE PREVIOUS SMILESMerge RUN AT: " >> $output_file
+        echo "CONTINUE PREVIOUS GlauconiteFilterer RUN AT: " >> $output_file
         date >> $output_file
         echo "###################################\n" >> $output_file
         echo "" >> $output_file
@@ -44,7 +44,7 @@ if echo $* | grep -q "Run"; then
         echo "" >> $error_file
         echo "" >> $error_file
         echo "###################################\n" >> $error_file
-        echo "CONTINUE PREVIOUS SMILESMerge RUN AT: " >> $error_file
+        echo "CONTINUE PREVIOUS GlauconiteFilterer RUN AT: " >> $error_file
         date >> $error_file
         echo "###################################\n" >> $error_file
         echo "" >> $error_file
@@ -52,12 +52,12 @@ if echo $* | grep -q "Run"; then
         echo "" >> $error_file
     fi
 
-    echo "/root/miniconda3/bin/python SMILESMerge/RunSMILESMerge.py -j /UserFiles/docker_json_vars.json >> $output_file 2> $error_file"
-    # Run SMILESMerge
-    /root/miniconda3/bin/python SMILESMerge/RunSMILESMerge.py \
+    echo "/root/miniconda3/bin/python GlauconiteFilterer/RunGlauconiteFilterer.py -j /UserFiles/docker_json_vars.json >> $output_file 2> $error_file"
+    # Run GlauconiteFilterer
+    /root/miniconda3/bin/python GlauconiteFilterer/RunGlauconiteFilterer.py \
         -j /UserFiles/docker_json_vars.json >> $output_file 2>> $error_file
 
-    echo "Completed SMILESMerge Run"
+    echo "Completed GlauconiteFilterer Run"
     # chmod -R a+rwx Outputfolder/
 fi
 exit
