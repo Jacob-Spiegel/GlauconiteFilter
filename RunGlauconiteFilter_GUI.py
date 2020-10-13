@@ -1,11 +1,11 @@
 # !/usr/bin/env python
 
-"""This is the executable file for GlauconiteFilterer. This script should come
+"""This is the executable file for GlauconiteFilter. This script should come
 first. It should obtain and verify all the parameters work. This than should
 pass these parameters variables to the main execution function titled
-GlauconiteFiltererMainExecute.py found in MainFunctions
+GlauconiteFilterMainExecute.py found in MainFunctions
 
-If you use GlauconiteFilterer in your research, please cite the following reference:
+If you use GlauconiteFilter in your research, please cite the following reference:
 Spiegel, J.O., Durrant, J.D. AutoGrow4: an open-source genetic algorithm
 for de novo drug design and lead optimization. J Cheminform 12, 25 (2020).
 [doi: 10.1186/s13321-020-00429-4]
@@ -28,7 +28,7 @@ except:
 # Imports of files are burried below to prevent EOF issues in MPI mode
 
 ################
-# Run GlauconiteFilterer #
+# Run GlauconiteFilter #
 ################
 # @Gooey
 @Gooey(advanced=True)
@@ -50,7 +50,7 @@ def run_parser():
         "-d",
         action="store_true",
         default=False,
-        help="Run GlauconiteFilterer in Debug mode. This keeps all \
+        help="Run GlauconiteFilter in Debug mode. This keeps all \
         temporary files and adds extra print statements.",
     )
 
@@ -273,20 +273,20 @@ if args_dict["cache_prerun"] is False:
     print("=====================================================")
     print("=====================================================\n\n")
 
-    # Run GlauconiteFilterer. Import move here to prevent EOF in MPI mode. importing
+    # Run GlauconiteFilter. Import move here to prevent EOF in MPI mode. importing
     # files before the Parallelizer class is established in MPI mode can have
     # errors
-    import glauconite.GlauconiteFilterer_main_execute as GlauconiteFiltererMainExecute
+    import glauconite.GlauconiteFilter_main_execute as GlauconiteFilterMainExecute
 
-    GlauconiteFiltererMainExecute.main_execute(vars)
+    GlauconiteFilterMainExecute.main_execute(vars)
 
     # Print completion message
 
-    printout = "\nGlauconiteFilterer run started at:   {}\nGlauconiteFilterer ".format(start_time)
+    printout = "\nGlauconiteFilter run started at:   {}\nGlauconiteFilter ".format(start_time)
     printout = printout + "run completed at: {}\n".format(str(datetime.datetime.now()))
     print(printout)
 
-    print("GlauconiteFilterer FINISHED")
+    print("GlauconiteFilter FINISHED")
 
     # # kill mpi workers
     vars["parallelizer"].end(vars["multithread_mode"])
@@ -294,5 +294,5 @@ if args_dict["cache_prerun"] is False:
 
 else:  # cache prerun. This is necessary to prevent race conditions in mpi mode.
     import glauconite.user_vars
-    import glauconite.GlauconiteFilterer_main_execute as GlauconiteFiltererMainExecute
+    import glauconite.GlauconiteFilter_main_execute as GlauconiteFilterMainExecute
     import glauconite.operators.convert_files.gypsum_dl.gypsum_dl.Parallelizer

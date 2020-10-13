@@ -205,6 +205,6 @@ VALIDATIONS = (
 
 # Allow definition of MolSchema to set custom validations on e.g.
 
-# People can define a filterer
+# People can define a Filter
 # This has a series of validations, and the required output - e.g. no error or no warns?
 

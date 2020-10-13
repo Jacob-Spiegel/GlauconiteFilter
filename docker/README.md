@@ -1,8 +1,8 @@
 # Docker Instructions
 
-This directory contains the scripts to run GlauconiteFilterer within a docker
+This directory contains the scripts to run GlauconiteFilter within a docker
 container. This is useful when using an operating system that is not
-compatible with the GlauconiteFilterer dependencies or that is not supported by our
+compatible with the GlauconiteFilter dependencies or that is not supported by our
 current multithreading approach, such as Windows.
 
 Before running these scripts, beb sure to install [docker
@@ -10,11 +10,11 @@ software](https://www.docker.com/products/docker-desktop). Please also always
 run these scripts with ***sudo*** (Linux/macOS) or ***administrative
 privileges*** (Windows).
 
-It takes a few minutes longer to run GlauconiteFilterer with docker the first time. The
+It takes a few minutes longer to run GlauconiteFilter with docker the first time. The
 same is true if docker images have been recently purged. The script must
 install the dependencies within the docker environment.
 
-Depending on the GlauconiteFilterer settings, processor speed/count, etc., GlauconiteFilterer
+Depending on the GlauconiteFilter settings, processor speed/count, etc., GlauconiteFilter
 may complete within minutes or may take as long as multiple days. Please run
 the container using the appropriate settings so that it can complete without
 being disrupted or disruptive. Using `nohup` may be useful when executing
@@ -22,11 +22,11 @@ longer runs or when running jobs remotely (i.e., over `ssh`).
 
 ## Run instructions
 
-To run GlauconiteFilterer in a docker, please use the `glauconite_in_docker.py` script:
+To run GlauconiteFilter in a docker, please use the `glauconite_in_docker.py` script:
 
 1. Example on Linux/MacOS:
    1. Change into the `docker` directory in a bash terminal `cd
-      GlauconiteFilterer/docker/`
+      GlauconiteFilter/docker/`
    2. Run `glauconite_in_docker.py` with ***sudo*** and supply a json file using
       the normal pathing of your system, i.e., `sudo python
       glauconite_in_docker.py -j ./examples/sample_glauconite_docker_json.json`
@@ -37,7 +37,7 @@ To run GlauconiteFilterer in a docker, please use the `glauconite_in_docker.py` 
    1. Open a docker-enabled and bash-enabled terminal with ***administrative
       privileges***.
    2. Change into the `docker` directory in a bash terminal `cd
-      GlauconiteFilterer/docker/`
+      GlauconiteFilter/docker/`
    3. Run `glauconite_in_docker.py` using the normal pathing of your system,
       i.e., `python glauconite_in_docker.py -j
       ./examples/sample_glauconite_docker_json.json`
@@ -48,8 +48,8 @@ To run GlauconiteFilterer in a docker, please use the `glauconite_in_docker.py` 
 
 ### For Use in the Host System
 
-- `glauconite_in_docker.py`: Runs GlauconiteFilterer from within docker. Launches a docker
-  image. Accepts the exact same parameters as GlauconiteFilterer, with the following
+- `glauconite_in_docker.py`: Runs GlauconiteFilter from within docker. Launches a docker
+  image. Accepts the exact same parameters as GlauconiteFilter, with the following
   exceptions:
   - User variables must be supplied in JSON format.
     - Please see documentation within the tutorial manual, where an example
@@ -75,7 +75,7 @@ To run GlauconiteFilterer in a docker, please use the `glauconite_in_docker.py` 
 
 ### Developer Notes
 
-- GlauconiteFilterer's Docker has been tested and fixed to install the following dependencies:
+- GlauconiteFilter's Docker has been tested and fixed to install the following dependencies:
   ```python
   >>> rdkit.__version__
   '2020.03.1'
@@ -87,5 +87,5 @@ To run GlauconiteFilterer in a docker, please use the `glauconite_in_docker.py` 
   '4.3.5'
   ```
 
-- Please test and update `$PATH/docker/Dockerfile` these as new versions of GlauconiteFilterer and
+- Please test and update `$PATH/docker/Dockerfile` these as new versions of GlauconiteFilter and
   these dependencies are released.

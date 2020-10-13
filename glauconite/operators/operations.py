@@ -66,7 +66,7 @@ def get_usable_format(infile):
     return usable_list_of_smiles
 
 #############
-# Main run GlauconiteFilterer operators to make a generation
+# Main run GlauconiteFilter operators to make a generation
 #############
 def populate_generation(vars):
     """

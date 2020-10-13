@@ -1,5 +1,5 @@
 """
-Top level for running GlauconiteFilterer.
+Top level for running GlauconiteFilter.
 Runs all population generation (operations).
 Runs plotting at end.
 """

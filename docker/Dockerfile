@@ -28,15 +28,15 @@ RUN /root/miniconda3/bin/conda install -y numpy numpy=1.18.1
 RUN /root/miniconda3/bin/conda install -y scipy scipy=1.4.1
 RUN /root/miniconda3/bin/pip install func_timeout==4.3.5
 
-# Copy over GlauconiteFilterer files
-RUN mkdir /GlauconiteFilterer/
-ADD ./GlauconiteFilterer /GlauconiteFilterer
+# Copy over GlauconiteFilter files
+RUN mkdir /GlauconiteFilter/
+ADD ./GlauconiteFilter /GlauconiteFilter
 
-# Copy over User files for GlauconiteFilterer Run
+# Copy over User files for GlauconiteFilter Run
 RUN mkdir /UserFiles
 ADD ./temp_user_files /UserFiles
 
-# Copy over the GlauconiteFilterer run script
+# Copy over the GlauconiteFilter run script
 ADD ./run_glauconite_in_container.bash /glauconite/run_glauconite_in_container.bash
 RUN chmod -R a+rwx /glauconite/run_glauconite_in_container.bash
 ADD ./run_glauconite_in_container_windows.bash /glauconite/run_glauconite_in_container_windows.bash
@@ -46,7 +46,7 @@ RUN chmod -R a+rwx /glauconite/run_glauconite_in_container_windows.bash
 RUN mkdir /Outputfolder
 
 
-RUN ls GlauconiteFilterer
+RUN ls GlauconiteFilter
 ENTRYPOINT ["bash", "/glauconite/run_glauconite_in_container.bash"]
 
 # Windows version. Automatically turned on by glauconite_in_docker.py

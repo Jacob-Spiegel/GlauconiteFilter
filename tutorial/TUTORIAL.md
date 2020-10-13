@@ -1,6 +1,6 @@
-# Welcome to GlauconiteFilterer
+# Welcome to GlauconiteFilter
 
-This document will break down how to run GlauconiteFilterer. It will also cover what
+This document will break down how to run GlauconiteFilter. It will also cover what
 dependencies are required.
 
 Please note that there are several paths used in this tutorial that need to be
@@ -10,56 +10,56 @@ AutoGrow):
 
 `cd /PATH_TO/DESIRED_DIR/`
 
-You must replace `/PATH_TO/DESIRED_DIR/` with the path to the `GlauconiteFilterer`
+You must replace `/PATH_TO/DESIRED_DIR/` with the path to the `GlauconiteFilter`
 directory on your own system. On a Ubuntu OS, this may look like:
 
 `cd /home/jacob/Documents/`
 
-For brevity, we simplify the main `GlauconiteFilterer` directory to `/GlauconiteFilterer/`
+For brevity, we simplify the main `GlauconiteFilter` directory to `/GlauconiteFilter/`
 throughout this tutorial. You may need to supply the `/PATH_TO/DESIRED_DIR/`
-described above before `/GlauconiteFilterer/`.
+described above before `/GlauconiteFilter/`.
 
 ## Computer Requirements
 
-GlauconiteFilterer has been tested on Ubuntu 16.04 and higher, as well as MacOS 10.13
+GlauconiteFilter has been tested on Ubuntu 16.04 and higher, as well as MacOS 10.13
 High Sierra. It has been verified to work on an HPC cluster using SMP
 multithreading (RedHat Enterprise Server release 7.3 Maipo).
 
-GlauconiteFilterer has not been configured for Windows OS, but a script capable of
-running GlauconiteFilterer within a docker container on Windows can be found:
+GlauconiteFilter has not been configured for Windows OS, but a script capable of
+running GlauconiteFilter within a docker container on Windows can be found:
 
-`/GlauconiteFilterer/docker/GlauconiteFilterer_in_docker.py`
+`/GlauconiteFilter/docker/GlauconiteFilter_in_docker.py`
 
 This script should run on any docker-enabled machine, and should be capable of
-multithreading. Details on running GlauconiteFilterer within a docker container can be
+multithreading. Details on running GlauconiteFilter within a docker container can be
 found below, in the Section: Docker submission.
 
-## Installing GlauconiteFilterer
+## Installing GlauconiteFilter
 
-Download a copy of GlauconiteFilterer from Jacob Spiegel's github at
-[https://github.com/Jacob-Spiegel/GlauconiteFilterer.git](https://github.com/Jacob-Spiegel/GlauconiteFilterer.git).
+Download a copy of GlauconiteFilter from Jacob Spiegel's github at
+[https://github.com/Jacob-Spiegel/GlauconiteFilter.git](https://github.com/Jacob-Spiegel/GlauconiteFilter.git).
 
-You can also install GlauconiteFilterer using the git clone command:
+You can also install GlauconiteFilter using the git clone command:
 
 ```bash
 cd /PATH_TO/DESIRED_DIR/
-git clone https://github.com/Jacob-Spiegel/GlauconiteFilterer.git
+git clone https://github.com/Jacob-Spiegel/GlauconiteFilter.git
 ```
 
 ## Dependencies
 
-GlauconiteFilterer has several dependencies that may need to be installed separately.
+GlauconiteFilter has several dependencies that may need to be installed separately.
 
 ### Bash (Required)
 
-A modern installation of bash is required to run GlauconiteFilterer. GlauconiteFilterer has been
+A modern installation of bash is required to run GlauconiteFilter. GlauconiteFilter has been
 tested using GNU bash, version 4.4.19. macOS and Linux come with Bash
 preinstalled.
 
 ### Coreutils (Required For macOS)
 
 Most Linux operating systems include the `timeout` tool (part of the
-`coreutils` package) that GlauconiteFilterer requires. Use on macOS requires the
+`coreutils` package) that GlauconiteFilter requires. Use on macOS requires the
 separate installation of the `coreutils` package, available through
 `homebrew`, which provides the equivalent `gtimeout` binary.
 
@@ -69,20 +69,20 @@ sudo brew install coreutils
 
 ### Python Installation (Required)
 
-GlauconiteFilterer is primarily written in python. A modern version of python can be
+GlauconiteFilter is primarily written in python. A modern version of python can be
 installed using `conda`:
 
 - [https://docs.conda.io/projects/conda/en/latest/user-guide/install/](https://docs.conda.io/projects/conda/en/latest/user-guide/install/),
   or
 - [http://www.python.org/getit/](http://www.python.org/getit/).
 
-GlauconiteFilterer has been tested with python 2.7, 3.6, and 3.7. Future support and
+GlauconiteFilter has been tested with python 2.7, 3.6, and 3.7. Future support and
 updates will focus on 3.7. We recommend using the most current version of
 python available, 3.7 or newer.
 
 ### Python APIs (Required)
 
-GlauconiteFilterer also uses several python API libraries beyond those found in the
+GlauconiteFilter also uses several python API libraries beyond those found in the
 standard library. These must be installed separately. Most can be installed
 via `conda` or `pip`.
 
@@ -95,7 +95,7 @@ install using `conda` use the command:
 conda install -c rdkit rdkit
 ```
 
-We use the following RDKit sub-libraries in GlauconiteFilterer:
+We use the following RDKit sub-libraries in GlauconiteFilter:
 
 ```python
 import rdkit
@@ -109,30 +109,30 @@ from rdkit.Chem.rdchem import BondStereo
 
 NumPy (mathematical functions) can be downloaded via `conda`/`pip`. It can be
 `conda` installed using the command `conda install -c anaconda numpy`.
-GlauconiteFilterer has been tested using `numpy` version 1.15.0.
+GlauconiteFilter has been tested using `numpy` version 1.15.0.
 
 SciPy (mathematical functions) can be downloaded via `conda`/`pip`. It can be
 `conda` installed using the command `conda install -c anaconda scipy`.
-GlauconiteFilterer has been tested using `scipy` version 1.1.0.
+GlauconiteFilter has been tested using `scipy` version 1.1.0.
 
 func_timeout (pythonic timeout tool) can be downloaded via `pip`. It can be
-`pip` installed using the command `pip install func-timeout`. GlauconiteFilterer has
+`pip` installed using the command `pip install func-timeout`. GlauconiteFilter has
 been tested using `func_timeout` version 4.3.5.
 
 #### Optional Installations
 
-Gooey API is required to run the GUI interface `/GlauconiteFilterer/RunGlauconiteFilterer_GUI.py`.
+Gooey API is required to run the GUI interface `/GlauconiteFilter/RunGlauconiteFilter_GUI.py`.
 It can be obtained via `conda`/`pip`. Details for installation can be found at:
 `https://github.com/chriskiehl/Gooey`
 
 
 mpi4py (MPI multithreading python library) is required for MPI multithreading.
 It can be downloaded via `conda`/`pip`. It can be `conda` installed using the
-command `conda install -c anaconda mpi4py`. GlauconiteFilterer has been tested using
+command `conda install -c anaconda mpi4py`. GlauconiteFilter has been tested using
 `mpi4py` version 3.0.1. This may require a preinstallation of `mpich`: `sudo
 apt install mpich`
 
-GlauconiteFilterer requires `mpi4py` version 2.1.0 and higher. To check the version:
+GlauconiteFilter requires `mpi4py` version 2.1.0 and higher. To check the version:
 
 1. open a python window.
 2. enter into the window:
@@ -161,21 +161,21 @@ RECOMMEND ATTEMPTING THIS ON YOUR OWN.
 
 ### Pre-Installed Python and Binary Dependencies
 
-GlauconiteFilterer comes with several dependencies preinstalled, requiring no
+GlauconiteFilter comes with several dependencies preinstalled, requiring no
 additional effort by the user. These packages have licenses that allow them to
 be freely redistributed. If a dependency updates, please feel free to contact
 us, and we will do our best to make our code future-compatible.
 
 #### SMILES Conversion to 3D and Protonation Adjustments
 
-GlauconiteFilterer performs most of its ligand handling using 2D SMILES. GlauconiteFilterer uses
+GlauconiteFilter performs most of its ligand handling using 2D SMILES. GlauconiteFilter uses
 the free and open-source program Gypsum-DL to convert from SMILES to 3D SDF
-format. Gypsum-DL is prepackaged in GlauconiteFilterer. Gypsum-DL itself also includes
+format. Gypsum-DL is prepackaged in GlauconiteFilter. Gypsum-DL itself also includes
 the MolVS and Dimorphite-DL packages.
 
 - Gypsum-DL:
   - Version: 1.1.2
-  - Location: `/GlauconiteFilterer/glauconite/operators/convert_files/gypsum_dl/`
+  - Location: `/GlauconiteFilter/glauconite/operators/convert_files/gypsum_dl/`
   - Citation: Ropp PJ, Spiegel JO, Walker JL, Green H, Morales GA, Milliken
     KA, Ringe JJ, Durrant JD. Gypsum-DL: An Open-Source Program for Preparing
     Small-Molecule Libraries for Structure-Based Virtual Screening. J
@@ -186,7 +186,7 @@ the MolVS and Dimorphite-DL packages.
 - Dimorphite-DL:
   - Version: 1.2.2
   - Location:
-    `/GlauconiteFilterer/glauconite/operators/convert_files/gypsum_dl/gypsum_dl/Steps/SMILES/dimorphite_dl`
+    `/GlauconiteFilter/glauconite/operators/convert_files/gypsum_dl/gypsum_dl/Steps/SMILES/dimorphite_dl`
   - Citation: Ropp PJ, Kaminsky JC, Yablonski S, Durrant JD (2019)
     Dimorphite-DL: An open-source program for enumerating the ionization
     states of drug-like small molecules. J Cheminform 11:14.
@@ -196,29 +196,29 @@ the MolVS and Dimorphite-DL packages.
 - MolVS:
   - Version: v0.1.1 2019 release
   - Location:
-    `/GlauconiteFilterer/glauconite/operators/convert_files/gypsum_dl/gypsum_dl/molvs`
+    `/GlauconiteFilter/glauconite/operators/convert_files/gypsum_dl/gypsum_dl/molvs`
   - Citation: https://molvs.readthedocs.io; Take from
     https://github.com/mcs07/MolVS
   - License: MIT License
 
-## Running GlauconiteFilterer
+## Running GlauconiteFilter
 
-There are two ways of running GlauconiteFilterer: (1) through command-line interface; (2)
+There are two ways of running GlauconiteFilter: (1) through command-line interface; (2)
 through GUI interface.
 
 ### Command-line Interface
 
-To run GlauconiteFilterer, use the python script `RunGlauconiteFilterer.py`, located in the top
-GlauconiteFilterer directory, from the command line. GlauconiteFilterer accepts user input via
+To run GlauconiteFilter, use the python script `RunGlauconiteFilter.py`, located in the top
+GlauconiteFilter directory, from the command line. GlauconiteFilter accepts user input via
 two methods:
 
 1. Command-line submission: executing directly from the command line.
 
 ```bash
-cd /PATH_TO/GlauconiteFilterer/
+cd /PATH_TO/GlauconiteFilter/
 
-python RunGlauconiteFilterer.py \
-    --source_compound_file /GlauconiteFilterer/source_compounds/naphthalene_smiles.smi \
+python RunGlauconiteFilter.py \
+    --source_compound_file /GlauconiteFilter/source_compounds/naphthalene_smiles.smi \
     --root_output_folder /PATH_TO/output_directory/ \
     --number_of_processors -1 \
     --LipinskiLenientFilter \
@@ -227,30 +227,30 @@ python RunGlauconiteFilterer.py \
     >  /PATH_TO/OUTPUT/text_file.txt 2>  /PATH_TO/OUTPUT/text_errormessage_file.txt
 ```
 
-2. json file submission: store GlauconiteFilterer parameters in a .json file
+2. json file submission: store GlauconiteFilter parameters in a .json file
 
 ```bash
-cd /PATH_TO/GlauconiteFilterer/
-python RunGlauconiteFilterer.py -j /PATH_TO/json_file_with_variable.json
+cd /PATH_TO/GlauconiteFilter/
+python RunGlauconiteFilter.py -j /PATH_TO/json_file_with_variable.json
 ```
 
 Examples of the json files can be found in the folder
-`/GlauconiteFilterer/sample_sub_scripts/`.
+`/GlauconiteFilter/sample_sub_scripts/`.
 
 ### GUI Interface
 
 The GUI interface requires the additional dependency of GOOEY (https://github.com/chriskiehl/Gooey). To use the GUI, please run the following command from a terminal with a modern Python environment:
 
-`python /GlauconiteFilterer/RunGlauconiteFilterer_GUI.py `
+`python /GlauconiteFilter/RunGlauconiteFilter_GUI.py `
 
 If all dependencies are installed properly this will prompt you to select all required parameters.
 
-## Understanding GlauconiteFilterer Parameters
+## Understanding GlauconiteFilter Parameters
 
 An explanation of every parameter can be retrieved by running:
 
 ```bash
-python /GlauconiteFilterer/RunGlauconiteFilterer.py --help
+python /GlauconiteFilter/RunGlauconiteFilter.py --help
 ```
 
 Custom options such as custom filters,
@@ -264,58 +264,58 @@ Source compound files simply tab-delineated SMILES files (.SMI). Specify the
 path using the parameter `--source_compound_file`.
 
 Examples of source compound files can be found at
-`/GlauconiteFilterer/source_compounds/`
+`/GlauconiteFilter/source_compounds/`
 
 A detail log of how the examples files were prepared is located at
-`/GlauconiteFilterer/source_compounds/Example_source_compound_notes.txt`
+`/GlauconiteFilter/source_compounds/Example_source_compound_notes.txt`
 
 An accessory script that converts a folder of PDB files to a tab-delineated
 .SMI file is provided at
-`/GlauconiteFilterer/accessory_scripts/convert_directory_ligands_pdb_to_smi.py`
+`/GlauconiteFilter/accessory_scripts/convert_directory_ligands_pdb_to_smi.py`
 
 Details for using this accessory script are provided near the bottom of this
 document, in the section
-"/GlauconiteFilterer/accessory_scripts/convert_directory_ligands_pdb_to_smi.py".
+"/GlauconiteFilter/accessory_scripts/convert_directory_ligands_pdb_to_smi.py".
 
 ## Docker Submission
 
-The `/GlauconiteFilterer/docker/` directory contains the scripts to run GlauconiteFilterer
+The `/GlauconiteFilter/docker/` directory contains the scripts to run GlauconiteFilter
 within a docker container. These scripts are useful when using an OS that is
-not compatible with GlauconiteFilterer or its dependencies, such as Windows.
+not compatible with GlauconiteFilter or its dependencies, such as Windows.
 
 Prior to running these scripts, please install the docker software. Also, be
 sure to ***also always run these scripts with sudo (linux/macOS) or
 administrator privileges (Windows).***.
 
-Running GlauconiteFilterer via docker the first time will take a few minutes longer
+Running GlauconiteFilter via docker the first time will take a few minutes longer
 because docker must install the dependencies. The same is true if docker
 images have been purged.
 
-Depending on the GlauconiteFilterer settings, processor speed/count, etc., GlauconiteFilterer
+Depending on the GlauconiteFilter settings, processor speed/count, etc., GlauconiteFilter
 may complete within minutes or may take as long as multiple days. Please make
 sure to use settings that are appropriate for your system. Using `nohup` may
 be a useful wrapper for longer runs or when running jobs remotely (i.e., over
 ssh).
 
 More details are provided directly below and in the
-`/GlauconiteFilterer/docker/README.md` section.
+`/GlauconiteFilter/docker/README.md` section.
 
-### How to Setup GlauconiteFilterer in Docker
+### How to Setup GlauconiteFilter in Docker
 
-Dockerized GlauconiteFilterer requires the user to specify parameters via a JSON file
+Dockerized GlauconiteFilter requires the user to specify parameters via a JSON file
 (not the command line).
 
-To run the `GlauconiteFilterer_in_docker.py` script:
+To run the `GlauconiteFilter_in_docker.py` script:
 
 Linux/MacOS:
 
-1. Change into the `/GlauconiteFilterer/docker/` directory in a bash terminal: `cd
-   /GlauconiteFilterer/docker/`
-2. Run `GlauconiteFilterer_in_docker.py` with `sudo` and supply a json file using the
+1. Change into the `/GlauconiteFilter/docker/` directory in a bash terminal: `cd
+   /GlauconiteFilter/docker/`
+2. Run `GlauconiteFilter_in_docker.py` with `sudo` and supply a json file using the
    normal pathing of your system.
-3. Execute `GlauconiteFilterer_in_docker.py` with `sudo` privileges, providing it with a
-   JSON file (MUST EXECUTE FROM `/GlauconiteFilterer/docker/`): `sudo python
-   GlauconiteFilterer_in_docker.py -j ./examples/sample_submit_GlauconiteFilterer_docker.json`
+3. Execute `GlauconiteFilter_in_docker.py` with `sudo` privileges, providing it with a
+   JSON file (MUST EXECUTE FROM `/GlauconiteFilter/docker/`): `sudo python
+   GlauconiteFilter_in_docker.py -j ./examples/sample_submit_GlauconiteFilter_docker.json`
 4. Results will appear in the output directory specified by the
    `--root_output_folder` parameter.
 
@@ -323,35 +323,35 @@ Windows OS:
 
 1. Open a docker-enabled and bash-enabled terminal with administrator
    privileges.
-2. Change into the `/GlauconiteFilterer/docker/` directory in a bash enabled terminal:
-   `cd /GlauconiteFilterer/docker/`
-3. Execute `GlauconiteFilterer_in_docker.py` with `sudo` privileges, providing it with a
-   JSON file (MUST EXECUTE FROM `/GlauconiteFilterer/docker/`): `python
-   GlauconiteFilterer_in_docker.py -j ./examples/sample_submit_GlauconiteFilterer_docker.json`
+2. Change into the `/GlauconiteFilter/docker/` directory in a bash enabled terminal:
+   `cd /GlauconiteFilter/docker/`
+3. Execute `GlauconiteFilter_in_docker.py` with `sudo` privileges, providing it with a
+   JSON file (MUST EXECUTE FROM `/GlauconiteFilter/docker/`): `python
+   GlauconiteFilter_in_docker.py -j ./examples/sample_submit_GlauconiteFilter_docker.json`
 4. Results will appear in the output directory specified by the
    `--root_output_folder` parameter.
 
 ## Providing Custom Plugins
 
-GlauconiteFilterer was designed to be modular. This allows for the easy swapping of
-code. GlauconiteFilterer is intended to be a living codebase. If you have added good
+GlauconiteFilter was designed to be modular. This allows for the easy swapping of
+code. GlauconiteFilter is intended to be a living codebase. If you have added good
 custom code and would like to make it open source, please contact the authors
 so that we can grow the user options.
 
-Many of the GlauconiteFilterer functions can be supplemented with custom options. These
+Many of the GlauconiteFilter functions can be supplemented with custom options. These
 functions include:
 
 1. Custom Ligand Filters ***
 
 *** Indicates that when using this feature, the code is automatically copied
-into the appropriate GlauconiteFilterer directory. This is only done once, so please
-unittest the code prior to incorporating it into GlauconiteFilterer. A print message
+into the appropriate GlauconiteFilter directory. This is only done once, so please
+unittest the code prior to incorporating it into GlauconiteFilter. A print message
 will indicate where the file has been copied. That file can be manually
-deleted or overwritten by the user. Restart GlauconiteFilterer after the custom files
+deleted or overwritten by the user. Restart GlauconiteFilter after the custom files
 have been automatically copied into the proper locations. After that the new
-script should be integrated into GlauconiteFilterer.
+script should be integrated into GlauconiteFilter.
 
-GlauconiteFilterer ASSUMES ALL CUSTOM CODE HAS BEEN TESTED AND FUNCTIONS WITH SPECIFIED
+GlauconiteFilter ASSUMES ALL CUSTOM CODE HAS BEEN TESTED AND FUNCTIONS WITH SPECIFIED
 I/O.
 
 ### 1. Custom Ligand Filters ***
@@ -360,7 +360,7 @@ This feature allows the user to incorporate custom python scripts for
 filtering ligands.
 
 This custom code will be copied to the directory:
-`/GlauconiteFilterer/glauconite/operators/filter/filter_classes/filter_children_classes/`
+`/GlauconiteFilter/glauconite/operators/filter/filter_classes/filter_children_classes/`
 
 #### Script Formatting
 
@@ -368,7 +368,7 @@ These filters use a class-based inheritance architecture with filter classes
 that must
 
 1. Inherit ParentFilterClass located at
-   `/GlauconiteFilterer/glauconite/operators/filter/filter_classes/parent_filter_class.py`
+   `/GlauconiteFilter/glauconite/operators/filter/filter_classes/parent_filter_class.py`
 2. Have a unique name: `class unique_name(ParentFilter)` (`unique_name` cannot
    match one of the predefined filters)
 3. Have at least one function called `run_filter` (`run_filter` takes a single
@@ -388,7 +388,7 @@ an example of each when submitting custom filters.
        `[["custom_filter_1","/PATH_TO/custom_filter_1.py"],["custom_filter_2","/PATH_TO/custom_filter_2.py"]]`
 
 ```bash
-python RunGlauconiteFilterer.py \
+python RunGlauconiteFilter.py \
     ... \
     --alternative_filter [["custom_filter_1","/PATH_TO/custom_filter_1.py"]]
 ```
@@ -408,28 +408,28 @@ python RunGlauconiteFilterer.py \
 }
 ```
 
-Submit in terminal: `python RunGlauconiteFilterer.py -j
+Submit in terminal: `python RunGlauconiteFilter.py -j
 /PATH_TO/json_file_with_variable.json`
 
-## Other Factors for Consideration Prior to Running GlauconiteFilterer
+## Other Factors for Consideration Prior to Running GlauconiteFilter
 
 ### Processors and Multiprocessing Style
 
-GlauconiteFilterer can be run on a local computer such as a laptop or PC,
+GlauconiteFilter can be run on a local computer such as a laptop or PC,
 as well as larger high-performance clusters and servers.
 
 #### If Running on a Laptop or PC
 
-We recommend lowering some GlauconiteFilterer parameters to reduce the computational
+We recommend lowering some GlauconiteFilter parameters to reduce the computational
 overhead for smaller machines.
 
 - Lower the `max_variation` to 1. This means for every ligand created by
-  GlauconiteFilterer, we will only create 1 conformer and thus only dock once per
+  GlauconiteFilter, we will only create 1 conformer and thus only dock once per
   ligand. This of course means a trade-off of getting more useful information
   for each ligand for computational efficiency.
 
 We also recommend considering how long you can allow the computer to run. If
-you need to continually use the computer while running GlauconiteFilterer then you want
+you need to continually use the computer while running GlauconiteFilter then you want
 to fix the `number_of_processors` to leave several available to perform other
 activities.
 
@@ -440,8 +440,8 @@ processors.
 #### If Running On A Larger Super Computer
 
 We recommend fixing the `number_of_processors` to however many processors you
-will be dedicating to GlauconiteFilterer. If `number_of_processors = -1` than all
-available processors will be use to run GlauconiteFilterer.
+will be dedicating to GlauconiteFilter. If `number_of_processors = -1` than all
+available processors will be use to run GlauconiteFilter.
 
 #### If Running On A Cluster
 
@@ -450,8 +450,8 @@ of processors in an SBATCH-type submission script.
 
 ## Multiprocessing/MPI/Parallelization/Parallelizer
 
-GlauconiteFilterer uses the `Parallelizer.py` script from Gypsum-DL
-(`/GlauconiteFilterer/glauconite/operators/convert_files/gypsum_dl/gypsum_dl/Parallelizer.py`).
+GlauconiteFilter uses the `Parallelizer.py` script from Gypsum-DL
+(`/GlauconiteFilter/glauconite/operators/convert_files/gypsum_dl/gypsum_dl/Parallelizer.py`).
 
 This script creates a Parallelizer class object which can divide jobs in three
 manners:
@@ -463,40 +463,40 @@ manners:
 
 ### Important Notes when Running on Clusters Using SLURM
 
-1. Multiprocessing: When running GlauconiteFilterer in **Multiprocessing mode** using
+1. Multiprocessing: When running GlauconiteFilter in **Multiprocessing mode** using
    SLURM, one should:
    1. 1st run the `cache_prerun` option on a single processor. `srun -n 1
-      python RunGlauconiteFilterer.py -c`
+      python RunGlauconiteFilter.py -c`
       - USE `srun` or `mpirun` for the `cache_prerun`. This limits the
         `prerun` to a single processor thus preventing errors caused by race
         conditions when creating pycache files.
-   2. Then run GlauconiteFilterer as intended. `python RunGlauconiteFilterer.py -j
+   2. Then run GlauconiteFilter as intended. `python RunGlauconiteFilter.py -j
       custom_parameters.json`
       - Do not use `srun` or `mpirun` for the production run. cpu/job
         distribution is handled internally. Using `srun` or `mpirun` can cause
         errors with the `mpi4py` universe.
-2. MPI: When running GlauconiteFilterer in **MPI mode** using SLURM, one should:
+2. MPI: When running GlauconiteFilter in **MPI mode** using SLURM, one should:
     1. 1st run the `cache_prerun` option on a single processor. `srun -n 1
-       python RunGlauconiteFilterer.py -c`
+       python RunGlauconiteFilter.py -c`
        - USE `srun` or `mpirun` for the `cache_prerun`. This limits the prerun
          to a single processor thus preventing errors caused by race
          conditions when creating pycache files.
     2. Then run the simulation as intended.
-        - `mpirun -n num_processors python -m mpi4py RunGlauconiteFilterer.py -j
+        - `mpirun -n num_processors python -m mpi4py RunGlauconiteFilter.py -j
           custom_parameters.json`
-        - Make sure to provide the `-m mpi4py` before `RunGlauconiteFilterer.py`. This
+        - Make sure to provide the `-m mpi4py` before `RunGlauconiteFilter.py`. This
           tells python how to handle Exceptions.
 
 ## Accessory Scripts
 
-GlauconiteFilterer provides several accessory scripts for preparing files, processing
+GlauconiteFilter provides several accessory scripts for preparing files, processing
 data, and analyzing data.
 
-These files can be found within the `/GlauconiteFilterer/accessory_scripts/` folder.
+These files can be found within the `/GlauconiteFilter/accessory_scripts/` folder.
 
 ### Preparation Scripts Pre-Run
 
-#### /GlauconiteFilterer/accessory_scripts/remove_duplicates_from_smi.sh
+#### /GlauconiteFilter/accessory_scripts/remove_duplicates_from_smi.sh
 
 This script accepts a file path to a tab-delineated .smi file. It then filters
 the file for redundancies in the 1st and 2nd columns of the file.
@@ -513,11 +513,11 @@ path to the tab-delineated .smi file to remove any redundancies.
 Example submit:
 
 ```bash
-bash /GlauconiteFilterer/accessory_scripts/remove_duplicates_from_smi.sh \
+bash /GlauconiteFilter/accessory_scripts/remove_duplicates_from_smi.sh \
     /PATH_TO/TO/SMILES.smi
 ```
 
-#### /GlauconiteFilterer/accessory_scripts/convert_directory_ligands_pdb_to_smi.py
+#### /GlauconiteFilter/accessory_scripts/convert_directory_ligands_pdb_to_smi.py
 
 This script converts a directory of pdb files (small molecules only, not
 proteins) to SMILES and creates a single .smi file with all SMILES.
@@ -536,13 +536,13 @@ This script takes 3 input arguments:
 Example run:
 
 ```bash
-python /GlauconiteFilterer/accessory_scripts/convert_directory_ligands_pdb_to_smi.py \
+python /GlauconiteFilter/accessory_scripts/convert_directory_ligands_pdb_to_smi.py \
     --source_folder /PATH_TO/OF/PDBS/ \
     --output_folder /PATH_TO/TO/OUTPUT/ \
     --number_of_processors -1
 ```
 
-#### /GlauconiteFilterer/accessory_scripts/fragmenter_of_smi_mol.py
+#### /GlauconiteFilter/accessory_scripts/fragmenter_of_smi_mol.py
 
 This script will fragment compounds from a .smi file. It is useful for lead
 optimization. This script was used for the PARPi lead-optimization runs in the
@@ -587,6 +587,6 @@ This script takes seven input arguments:
 Example run:
 
 ```bash
-python /GlauconiteFilterer/accessory_scripts/fragmenter_of_smi_mol.py \
+python /GlauconiteFilter/accessory_scripts/fragmenter_of_smi_mol.py \
     -smi_file /PATH_TO/OF/SMILES.smi
 ```
