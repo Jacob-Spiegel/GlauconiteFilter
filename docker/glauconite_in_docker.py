@@ -31,7 +31,8 @@ To run GlauconiteFilter in a docker, please run the `glauconite_in_docker.py` sc
         1) cd GlauconiteFilter/docker/
         # Run glauconite_in_docker.py with sudo and supply a json file using the
         # normal pathing of your system.
-        2) `sudo python glauconite_in_docker.py -j ./examples/sample_GlauconiteFilter_docker_json.json`
+        2) `sudo python glauconite_in_docker.py
+            -j ./examples/sample_GlauconiteFilter_docker_json.json`
 
         # Results will be output to the directory specified by the root_output_folder variable
 
@@ -87,7 +88,7 @@ def change_permissions_recursively(file_or_folder_path):
             directory_path_list = []
             file_list = []
             for top_dir, dir_list, list_of_files in os.walk(
-                file_or_folder_path, topdown=False
+                    file_or_folder_path, topdown=False
             ):
                 for directory in [os.path.join(top_dir, d) for d in dir_list]:
                     directory_path_list.append(directory)
@@ -279,7 +280,8 @@ def check_for_required_inputs(json_vars):
         + os.sep + "inputs" + os.sep
         + os.path.basename(json_vars["source_compound_file"]),
     )
-    json_vars["source_compound_file"] = "/Outputfolder/inputs/" + os.path.basename(json_vars["source_compound_file"])
+    json_vars["source_compound_file"] = "/Outputfolder/inputs/" + \
+         os.path.basename(json_vars["source_compound_file"])
 
     return json_vars
 
@@ -452,16 +454,17 @@ def move_files_to_temp_dir(json_vars):
 
     # Copy all files in GlauconiteFilter directory into a temp except the Docker folder
     for fol_to_copy in [
-        "glauconite",
-        "source_compounds",
-        "accessory_scripts",
-        "tutorial",
+            "glauconite",
+            "source_compounds",
+            "accessory_scripts",
+            "tutorial",
     ]:
         shutil.copytree(
             glauconite_top_dir + fol_to_copy, temp_glauconite_path + fol_to_copy
         )
     shutil.copyfile(
-        glauconite_top_dir + "RunGlauconiteFilter.py", temp_glauconite_path + "RunGlauconiteFilter.py"
+        glauconite_top_dir + "RunGlauconiteFilter.py", temp_glauconite_path + \
+            "RunGlauconiteFilter.py"
     )
     # Open permissions
     change_permissions_recursively(temp_glauconite_path)
@@ -601,8 +604,9 @@ if ARGS_DICT["override_sudo_admin_privileges"] == False:
     elif sys.platform.lower() == "win32" or sys.platform.lower() == "cygwin":
         import ctypes
         if ctypes.windll.shell32.IsUserAnAdmin() != 1:
-            printout = "\n\nMust run this script from a terminal with `Administrator` privileges.\n\t"
-            printout = printout + "Please retry running with `Administrator` privileges.\n\n"
+            printout = "\n\nMust run this script from a terminal with `Administrator`"
+            printout = printout + " privileges.\n\tPlease retry"
+            printout = printout + " running with `Administrator` privileges.\n\n"
             print(printout)
             raise Exception(printout)
     else:
