@@ -11,7 +11,6 @@ import copy
 import datetime
 import json
 import sys
-import platform
 from shutil import copyfile
 
 
@@ -36,7 +35,6 @@ def program_info():
     program_output = program_output + " ================== \n\n"
 
     return program_output
-
 
 #
 def save_vars_as_json(vars):
@@ -79,7 +77,6 @@ def save_vars_as_json(vars):
 
     with open(vars_file, "w") as fp:
         json.dump(temp_vars, fp, indent=4)
-
 
 def multiprocess_handling(vars):
     """
@@ -151,7 +148,6 @@ def multiprocess_handling(vars):
         )
 
     return vars
-
 
 ############################################
 ###### Variables Handlining Settings #######
@@ -238,8 +234,6 @@ def check_for_required_inputs(input_params):
             tab delineated .smi file."
         )
 
-
-
 def determine_bash_timeout_vs_gtimeout():
     """
     This function tests whether we should use the BASH command "timeout" (for linux)
@@ -295,7 +289,6 @@ def determine_bash_timeout_vs_gtimeout():
     printout = printout + " sudo brew install coreutils \n\n"
     print(printout)
     raise Exception(printout)
-
 
 def check_dependencies():
     """
@@ -405,7 +398,6 @@ def check_dependencies():
             textwrap, pickle,json"
         )
 
-
 def define_defaults():
     """
     Sets the command-line parameters to their default values.
@@ -490,7 +482,6 @@ def convert_json_params_from_unicode(params_unicode):
             key = param
             params[key] = val
     return params
-
 
 def check_value_types(vars, argv):
     """
@@ -612,7 +603,6 @@ def check_value_types(vars, argv):
                     raise IOError(printout)
     return vars, argv
 
-
 def load_in_commandline_parameters(argv):
     """
     Load in the command-line parameters
@@ -698,7 +688,6 @@ def load_in_commandline_parameters(argv):
 
     return vars, printout
 
-
 ############################################
 ######### File Handlining Settings #########
 ############################################
@@ -734,7 +723,6 @@ def find_previous_runs(folder_name_path):
     # A previous run exists. The number of the last run.
     last_run_number = i - 1
     return last_run_number
-
 
 def set_run_directory(root_folder_path):
     """
@@ -777,7 +765,6 @@ def set_run_directory(root_folder_path):
     print("")
     return folder_path
 
-
 ############################################
 ########   Custom Option Settings   ########
 ############################################
@@ -817,7 +804,6 @@ def handle_custom_inputs_if_argparsed(input_params):
         input_params["alternative_filter"] = new_alternative_filter
 
     return input_params
-
 
 #
 def handle_alternative_filters(vars, filter_list):
@@ -1000,7 +986,6 @@ def filter_choice_handling(vars):
     vars["filter_object_dict"] = Filter.make_run_class_dict(chosen_ligand_filters)
 
     return vars
-
 
 #
 def picked_filters(vars):

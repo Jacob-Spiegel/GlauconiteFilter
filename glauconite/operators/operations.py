@@ -4,20 +4,11 @@ Also filters and converts SMILES to 3d SDFS.
 import __future__
 
 import os
-import random
-import copy
 import sys
 import glob
 
-import rdkit
-import rdkit.Chem as Chem
-
-# Disable the unnecessary RDKit warnings
-rdkit.RDLogger.DisableLog("rdApp.*")
-
 import glauconite.operators.filter.execute_filters as Filter
 import glauconite.operators.convert_files.conversion_to_3d as conversion_to_3d
-import glauconite.operators.convert_files.gypsum_dl.gypsum_dl.MolObjectHandling as MOH
 
 
 def get_usable_format(infile):
@@ -92,7 +83,6 @@ def populate_generation(vars):
     :returns: bool None: returns None twice if any step failed. This will
         result in the program ending
     """
-    number_of_processors = int(vars["number_of_processors"])
 
     # Get the Source compound list. This list is the full population from
     # either the previous generations or if its Generation 1 than the its the
@@ -159,9 +149,9 @@ def get_list_of_3D_SMILES(vars, new_generation_smiles_list):
         pdb_files = glob.glob(PDBs_dir + short_id + "__*.pdb")
         pdb_files.sort()
         for pdb_pose in pdb_files:
-            base_info = os.path.basename(pdb_pose).replace(".pdb","")
+            base_info = os.path.basename(pdb_pose).replace(".pdb", "")
             with open(pdb_pose) as f:
-                SMILES_string = f.readline().replace("\n","")
+                SMILES_string = f.readline().replace("\n", "")
                 SMILES_string = SMILES_string.replace("REMARK Final SMILES string: ", "")
             list_of_3D_SMILES.append("\t".join([SMILES_string, mol_info[1], base_info]))
 

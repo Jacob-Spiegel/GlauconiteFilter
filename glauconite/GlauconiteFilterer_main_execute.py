@@ -5,10 +5,7 @@ Runs plotting at end.
 """
 import __future__
 
-import os
-import glob
 import sys
-import shutil
 
 import glauconite.operators.operations as operations
 
@@ -20,11 +17,6 @@ def main_execute(vars):
     :param dict vars: dict of user variables which will govern how the
         programs runs
     """
-
-    # Unpack necessary variables
-    # output_directory is the root output folder for the run
-    output_directory = vars["output_directory"]
-
     # This will run operations which will:
     # 1) filter ligands
     # 2) optionally convert from 1D smiles to 3D (mol2/PDB)
