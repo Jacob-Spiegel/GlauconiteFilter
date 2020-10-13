@@ -85,7 +85,7 @@ def run_filter(vars, list_of_new_ligands, verbose=True):
     ligands_failed_to_sanitize = [x[0] for x in results if x[1]=="Sanitize_fail"]
     ligands_which_failed_filter = [x[0] for x in results if x[1]=="Filter_fail"]
     ligands_which_passed_filter = [x[0] for x in results if x[1]=="Filter_Passed"]
-    
+
     if verbose is True:
         print("######################")
         print("")
@@ -117,7 +117,7 @@ def run_filter_mol(smiles_info, child_dict):
         User specifies no filters
 
     Returns:
-    :returns: list smiles_info: list of the smiles_info if it passed the filter and 
+    :returns: list smiles_info: list of the smiles_info if it passed the filter and
         "Filter_Passed".
         returns smiles_info and "Sanitize_fail" if the mol fails to sanitize.
         returns smiles_info and "Sanitize_fail" if the mol fails one or more filters.

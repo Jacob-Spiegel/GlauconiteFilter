@@ -28,7 +28,7 @@ def main_execute(vars):
     # This will run operations which will:
     # 1) filter ligands
     # 2) optionally convert from 1D smiles to 3D (mol2/PDB)
-    
+
     sys.stdout.flush()
 
     smile_file_new_gen, new_gen_ligands_list = operations.populate_generation(vars)
