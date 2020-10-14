@@ -50,16 +50,6 @@ def run_parser():
         Overrides other arguments.",
     )
 
-    # Allows the run in debug mode. Doesn't delete temp files.
-    PARSER.add_argument(
-        "--debug_mode",
-        "-d",
-        action="store_true",
-        default=False,
-        help="Run GlauconiteFilter in Debug mode. This keeps all \
-        temporary files and adds extra print statements.",
-    )
-
     # Input/Output directories
     PARSER.add_argument(
         "--root_output_folder",
