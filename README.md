@@ -1,5 +1,7 @@
 # GlauconiteFilter
 
+[![DOI](https://zenodo.org/badge/303535253.svg)](https://zenodo.org/badge/latestdoi/303535253)
+
 GlauconiteFilter is a free, open-source program for parallelized ADME-PK chemical filtration. GlauconiteFilter uses the AutoGrow4 filtration algorithm to SMILES strings. It is a highly parallelized algorithm that has been test on both SMP and MPI high performance computing environments. GlauconiteFilter provides nine predefined chemical filters, however, its intuitive plugin-style architecture allows for the easy expansion of filter options. GlauconiteFilter also provides the option to automate 1/2D SMILES to 3D conversion using Gypsum-DL.
 
 GlauconiteFilter accepts a list of SMILES (in .smi format) and will output a list of compounds
@@ -51,7 +53,8 @@ Much of this code is take directly and/or adapted from AutoGrow4. This program a
 
 ## GlauconiteFilter Citation:
 
-- Citation Pending
+- Spiegel, J.O. GlauconiteFilter: an open-source program for automated ADME-PK filtering. (2020) [doi: 10.5281/zenodo.4087648]
+[![DOI](https://zenodo.org/badge/303535253.svg)](https://zenodo.org/badge/latestdoi/303535253)
 
 ## AutoGrow4 Citation:
 
