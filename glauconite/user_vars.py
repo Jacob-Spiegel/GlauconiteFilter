@@ -298,12 +298,12 @@ def check_dependencies():
 
     # Check Bash Timeout function (There's a difference between MacOS and linux)
     # Linux uses timeout while MacOS uses gtimeout
-    timeout_option = determine_bash_timeout_vs_gtimeout()
-    if timeout_option not in ["timeout", "gtimeout"]:
-        raise Exception(
-            "Something is very wrong. This OS may not be supported by \
-        GlauconiteFilter or you may need to execute through Bash."
-        )
+    # timeout_option = determine_bash_timeout_vs_gtimeout()
+    # if timeout_option not in ["timeout", "gtimeout"]:
+    #     raise Exception(
+    #         "Something is very wrong. This OS may not be supported by \
+    #     GlauconiteFilter or you may need to execute through Bash."
+    #     )
 
     try:
         import rdkit
@@ -441,14 +441,14 @@ def define_defaults():
 
     # Check Bash Timeout function (There's a difference between MacOS and linux)
     # Linux uses timeout while MacOS uses gtimeout
-    timeout_option = determine_bash_timeout_vs_gtimeout()
-    if timeout_option in  ["timeout", "gtimeout"]:
-        vars["timeout_vs_gtimeout"] = timeout_option
-    else:
-        raise Exception(
-            "Something is very wrong. This OS may not be supported by \
-             GlauconiteFilter or you may need to execute through Bash."
-        )
+    # timeout_option = determine_bash_timeout_vs_gtimeout()
+    # if timeout_option in  ["timeout", "gtimeout"]:
+    #     vars["timeout_vs_gtimeout"] = timeout_option
+    # else:
+    #     raise Exception(
+    #         "Something is very wrong. This OS may not be supported by \
+    #          GlauconiteFilter or you may need to execute through Bash."
+    #     )
 
     return vars
 
