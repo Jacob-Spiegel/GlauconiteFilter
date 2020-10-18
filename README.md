@@ -51,7 +51,8 @@ Much of this code is take directly and/or adapted from AutoGrow4. This program a
 
 ## GlauconiteFilter Citation:
 
-- Citation Pending
+- Spiegel, J.O., Durrant, J.D., GlauconiteFilter: an open-source program for automated ADME-PK filtering. (2020) https://doi.org/10.5281/zenodo.4087647
+[![DOI](https://zenodo.org/badge/303535253.svg)](https://zenodo.org/badge/latestdoi/303535253)
 
 ## AutoGrow4 Citation:
 
