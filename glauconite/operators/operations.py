@@ -110,6 +110,8 @@ def populate_generation(vars):
         passed_ligands,
         "SMILES_Passed_All_Filters",
     )
+    full_generation_smiles_file = vars["output_directory"] + os.sep + \
+        "SMILES_Passed_All_Filters.SMI"
     save_ligand_list(
         vars["output_directory"],
         failed_filters,
@@ -129,7 +131,7 @@ def populate_generation(vars):
 
     sys.stdout.flush()
 
-    return smiles_to_convert_file, passed_ligands
+    return full_generation_smiles_file, passed_ligands
 
 def get_list_of_3D_SMILES(vars, new_generation_smiles_list):
     """
